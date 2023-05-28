@@ -8,7 +8,7 @@ import { BsSignpostSplit } from 'react-icons/bs';
 import { CgBee } from 'react-icons/cg';
 import { BiHappyAlt } from 'react-icons/bi';
 import { MdVerticalAlignCenter } from 'react-icons/md';
-import { GiPoliceBadge } from 'react-icons/gi';
+import {MdOutlineSportsKabaddi} from 'react-icons/md';
 import { GiTerror } from 'react-icons/gi';
 import { GiNightSky } from 'react-icons/gi';
 import { GiThreePointedShuriken } from 'react-icons/gi';
@@ -76,7 +76,7 @@ const Map = () => {
     {
       id: 10,
       title: 'Bad Guys Close In',
-      icon: <GiPoliceBadge />,
+      icon: <MdOutlineSportsKabaddi />,
       information: ''
     },
     {
