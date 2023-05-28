@@ -1,5 +1,8 @@
-.dash-title {
-    text-align: center;
-    font-size: 2.5rem;
-    margin: 2rem;
+.dash-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
+
