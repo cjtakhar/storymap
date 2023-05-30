@@ -128,9 +128,10 @@ const Map = () => {
 
   const handleCardClick = (index) => {
     const updatedCard = prompt(
-      'Enter information for the card:',
+      `${cards[index].title}:`,
       cards[index].information
     );
+    
     if (updatedCard !== null) {
       const newCards = [...cards];
       newCards[index].information = updatedCard;
