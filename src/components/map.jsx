@@ -114,30 +114,32 @@ const Map = () => {
   useEffect(() => {
     const storedInfo = localStorage.getItem('cardInfo');
     if (storedInfo) {
+      const parsedInfo = JSON.parse(storedInfo);
       const updatedCards = cards.map((card, index) => {
-        return { ...card, information: storedInfo[index] };
+        return { ...card, information: parsedInfo[index] };
       });
       setCards(updatedCards);
     }
-  }, []);
+  }, [setCards, cards]);  
 
   useEffect(() => {
-    const cardInfo = cards.map((card) => card.information);
+    const cardInfo = cards.map((card) => card.information || '');
     localStorage.setItem('cardInfo', JSON.stringify(cardInfo));
-  }, [cards]);
+  }, [cards]);  
 
   const handleCardClick = (index) => {
     const updatedCard = prompt(
       `${cards[index].title}:`,
       cards[index].information
     );
-    
+  
     if (updatedCard !== null) {
       const newCards = [...cards];
-      newCards[index].information = updatedCard;
+      newCards[index].information = updatedCard !== "" ? updatedCard : null;
       setCards(newCards);
     }
   };
+  
 
   return (
     <div className="container">
@@ -154,9 +156,9 @@ const Map = () => {
                   {React.cloneElement(card.icon, { size: '3em' })}
                 </div>
                 <h5 className="card-title">{card.title}</h5>
-                <p className="card-text">
-                  {card.information ? card.information : ''}
-                </p>
+                {card.information !== '' && (
+                <p className="card-text">{card.information}</p>
+                )}
               </div>
             </div>
           </div>
