@@ -120,7 +120,7 @@ const Map = () => {
       });
       setCards(updatedCards);
     }
-  }, [setCards, cards]);  
+  }, []);  
 
   useEffect(() => {
     const cardInfo = cards.map((card) => card.information || '');
