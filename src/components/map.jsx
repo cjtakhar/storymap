@@ -126,7 +126,7 @@ const Map = () => {
         {cards.map((card) => (
           <div
             key={card.id}
-            className="col-lg-4 col-md-6 col-sm-12 col-12 mb-4"
+            className="card-container"
             onClick={() => handleCardClick(card.id - 1)}
           >
             <div className="card">
