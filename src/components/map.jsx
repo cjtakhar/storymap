@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FiSunrise } from 'react-icons/fi';
 import { BsLightbulb } from 'react-icons/bs';
 import { GrPowerCycle } from 'react-icons/gr';
@@ -111,8 +111,26 @@ const Map = () => {
     },
   ]);
 
+  useEffect(() => {
+    const storedInfo = localStorage.getItem('cardInfo');
+    if (storedInfo) {
+      const updatedCards = cards.map((card, index) => {
+        return { ...card, information: storedInfo[index] };
+      });
+      setCards(updatedCards);
+    }
+  }, []);
+
+  useEffect(() => {
+    const cardInfo = cards.map((card) => card.information);
+    localStorage.setItem('cardInfo', JSON.stringify(cardInfo));
+  }, [cards]);
+
   const handleCardClick = (index) => {
-    const updatedCard = prompt('Enter information for the card:', cards[index].information);
+    const updatedCard = prompt(
+      'Enter information for the card:',
+      cards[index].information
+    );
     if (updatedCard !== null) {
       const newCards = [...cards];
       newCards[index].information = updatedCard;
@@ -135,7 +153,9 @@ const Map = () => {
                   {React.cloneElement(card.icon, { size: '3em' })}
                 </div>
                 <h5 className="card-title">{card.title}</h5>
-                <p className="card-text">{card.information}</p>
+                <p className="card-text">
+                  {card.information ? card.information : ''}
+                </p>
               </div>
             </div>
           </div>
