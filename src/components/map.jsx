@@ -115,12 +115,13 @@ const Map = () => {
     const storedInfo = localStorage.getItem('cardInfo');
     if (storedInfo) {
       const parsedInfo = JSON.parse(storedInfo);
-      const updatedCards = cards.map((card, index) => {
-        return { ...card, information: parsedInfo[index] };
+      setCards(prevCards => {
+        return prevCards.map((card, index) => {
+          return { ...card, information: parsedInfo[index] };
+        });
       });
-      setCards(updatedCards);
     }
-  }, []);  
+  }, []); 
 
   useEffect(() => {
     const cardInfo = cards.map((card) => card.information || '');
