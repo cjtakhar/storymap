@@ -135,10 +135,11 @@ const Map = () => {
   
     if (updatedCard !== null) {
       const newCards = [...cards];
-      newCards[index].information = updatedCard !== "" ? updatedCard : null;
+      newCards[index].information = updatedCard !== "" ? updatedCard : "";
       setCards(newCards);
     }
   };
+  
   
 
   return (
