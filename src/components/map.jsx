@@ -9,7 +9,7 @@ import { CgBee } from 'react-icons/cg';
 import { BiHappyAlt } from 'react-icons/bi';
 import { MdVerticalAlignCenter } from 'react-icons/md';
 import {MdOutlineSportsKabaddi} from 'react-icons/md';
-import { GiTerror } from 'react-icons/gi';
+import {GiBackPain} from 'react-icons/gi';
 import { GiNightSky } from 'react-icons/gi';
 import { GiThreePointedShuriken } from 'react-icons/gi';
 import { GiRainbowStar } from 'react-icons/gi';
@@ -82,7 +82,7 @@ const Map = () => {
     {
       id: 11,
       title: 'All Is Lost',
-      icon: <GiTerror />,
+      icon: <GiBackPain />,
       information: ''
     },
     {
