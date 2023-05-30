@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { FiSunrise } from 'react-icons/fi';
 import { BsLightbulb } from 'react-icons/bs';
 import { GrPowerCycle } from 'react-icons/gr';
@@ -18,107 +18,98 @@ import './styles/map.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Map = () => {
-  const [cards, setCards] = useState([]);
-
-  useEffect(() => {
-    const savedInformation = localStorage.getItem('cardInformation');
-    if (savedInformation) {
-      setCards(JSON.parse(savedInformation));
-    } else {
-      setCards([
-        {
-          id: 1,
-          title: 'Opening Image',
-          icon: <FiSunrise />,
-          information: ''
-        },
-        {
-          id: 2,
-          title: 'Theme Stated',
-          icon: <BsLightbulb />,
-          information: ''
-        },
-        {
-          id: 3,
-          title: 'Set-Up',
-          icon: <GrPowerCycle />,
-          information: ''
-        },
-        {
-          id: 4,
-          title: 'Catalyst',
-          icon: <GiMatchHead />,
-          information: ''
-        },
-        {
-          id: 5,
-          title: 'Debate',
-          icon: <GrChatOption />,
-          information: ''
-        },
-        {
-          id: 6,
-          title: 'Break Into Two',
-          icon: <BsSignpostSplit />,
-          information: ''
-        },
-        {
-          id: 7,
-          title: 'B Story',
-          icon: <CgBee />,
-          information: ''
-        },
-        {
-          id: 8,
-          title: 'Fun & Games',
-          icon: <BiHappyAlt />,
-          information: ''
-        },
-        {
-          id: 9,
-          title: 'Midpoint',
-          icon: <MdVerticalAlignCenter />,
-          information: ''
-        },
-        {
-          id: 10,
-          title: 'Bad Guys Close In',
-          icon: <MdOutlineSportsKabaddi />,
-          information: ''
-        },
-        {
-          id: 11,
-          title: 'All Is Lost',
-          icon: <GiBackPain />,
-          information: ''
-        },
-        {
-          id: 12,
-          title: 'Dark Night of the Soul',
-          icon: <GiNightSky />,
-          information: ''
-        },
-        {
-          id: 13,
-          title: 'Break Into Three',
-          icon: <GiThreePointedShuriken />,
-          information: ''
-        },
-        {
-          id: 14,
-          title: 'Finale',
-          icon: <GiRainbowStar />,
-          information: ''
-        },
-        {
-          id: 15,
-          title: 'Final Image',
-          icon: <FiSunset />,
-          information: ''
-        },
-      ]);
-    }
-  }, []);
+  const [cards, setCards] = useState([
+    {
+      id: 1,
+      title: 'Opening Image',
+      icon: <FiSunrise />,
+      information: ''
+    },
+    {
+      id: 2,
+      title: 'Theme Stated',
+      icon: <BsLightbulb />,
+      information: ''
+    },
+    {
+      id: 3,
+      title: 'Set-Up',
+      icon: <GrPowerCycle />,
+      information: ''
+    },
+    {
+      id: 4,
+      title: 'Catalyst',
+      icon: <GiMatchHead />,
+      information: ''
+    },
+    {
+      id: 5,
+      title: 'Debate',
+      icon: <GrChatOption />,
+      information: ''
+    },
+    {
+      id: 6,
+      title: 'Break Into Two',
+      icon: <BsSignpostSplit />,
+      information: ''
+    },
+    {
+      id: 7,
+      title: 'B Story',
+      icon: <CgBee />,
+      information: ''
+    },
+    {
+      id: 8,
+      title: 'Fun & Games',
+      icon: <BiHappyAlt />,
+      information: ''
+    },
+    {
+      id: 9,
+      title: 'Midpoint',
+      icon: <MdVerticalAlignCenter />,
+      information: ''
+    },
+    {
+      id: 10,
+      title: 'Bad Guys Close In',
+      icon: <MdOutlineSportsKabaddi />,
+      information: ''
+    },
+    {
+      id: 11,
+      title: 'All Is Lost',
+      icon: <GiBackPain />,
+      information: ''
+    },
+    {
+      id: 12,
+      title: 'Dark Night of the Soul',
+      icon: <GiNightSky />,
+      information: ''
+    },
+    {
+      id: 13,
+      title: 'Break Into Three',
+      icon: <GiThreePointedShuriken />,
+      information: ''
+    },
+    {
+      id: 14,
+      title: 'Finale',
+      icon: <GiRainbowStar />,
+      information: ''
+    },
+    {
+      id: 15,
+      title: 'Final Image',
+      icon: <FiSunset />,
+      information: ''
+    },
+  ]);
 
   const handleCardClick = (index) => {
     const updatedCard = prompt('Enter information for the card:', cards[index].information);
@@ -126,7 +117,6 @@ const Map = () => {
       const newCards = [...cards];
       newCards[index].information = updatedCard;
       setCards(newCards);
-      localStorage.setItem('cardInformation', JSON.stringify(newCards));
     }
   };
 
@@ -145,7 +135,6 @@ const Map = () => {
                   {React.cloneElement(card.icon, { size: '3em' })}
                 </div>
                 <h5 className="card-title">{card.title}</h5>
-
                 <p className="card-text">{card.information}</p>
               </div>
             </div>
