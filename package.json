@@ -1,6 +1,6 @@
 {
-  "name": "beatmap",
-  "version": "0.1.0",
+  "name": "storymap",
+  "version": "1.0.2",
   "private": true,
   "homepage": "https://cjtakhar.github.io/storymap",
   "dependencies": {
