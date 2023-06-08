@@ -50,6 +50,7 @@ const Login = () => {
             <button className="form-button" type="submit">
               Login
             </button>
+            <p className="create-account">Create Account</p>
           </div>
         </form>
       </div>

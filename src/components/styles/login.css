@@ -15,6 +15,7 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     margin-top: 10vh;
+    height: 50vh;
 }
 
 .form {
@@ -68,4 +69,15 @@
     color: white;
     border: solid 1px;
     transition: ease-in-out 0.2s;
+}
+
+.create-account {
+    transition: ease-in-out 0.2s;
+    margin: 10px;  
+}
+
+.create-account:hover {
+    color: teal;
+    transition: ease-in-out 0.2s;
+    cursor: pointer;
 }
