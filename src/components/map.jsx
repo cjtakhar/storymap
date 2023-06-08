@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { FiSunrise } from 'react-icons/fi';
 import { BsLightbulb } from 'react-icons/bs';
 import { GrPowerCycle } from 'react-icons/gr';
@@ -112,16 +113,27 @@ const Map = () => {
   ]);
 
   useEffect(() => {
-    const storedInfo = localStorage.getItem('cardInfo');
-    if (storedInfo) {
-      const parsedInfo = JSON.parse(storedInfo);
-      setCards(prevCards => {
-        return prevCards.map((card, index) => {
-          return { ...card, information: parsedInfo[index] };
+    const token = localStorage.getItem('token');
+  
+    axios.get('http://localhost:5000/api/cards', {
+      headers: {
+        Authorization: token,
+      },
+    })
+      .then(response => {
+        const cardData = response.data;
+        setCards(prevCards => {
+          return prevCards.map((card, index) => {
+            const foundCard = cardData.cards.find(c => c.id === card.id);
+            return { ...card, information: foundCard ? foundCard.information : '' };
+          });
         });
+      })
+      .catch(error => {
+        console.log('Error retrieving cards:', error);
       });
-    }
-  }, []); 
+  }, []);
+  
 
   useEffect(() => {
     const cardInfo = cards.map((card) => card.information || '');
@@ -138,10 +150,28 @@ const Map = () => {
       const newCards = [...cards];
       newCards[index].information = updatedCard !== "" ? updatedCard : "";
       setCards(newCards);
+  
+      const token = localStorage.getItem('token');
+      const cardData = {
+        cards: newCards.map((card) => ({
+          id: card.id,
+          information: card.information,
+        })),
+      };
+  
+      axios.post('http://localhost:5000/api/cards', cardData, {
+        headers: {
+          Authorization: token,
+        },
+      })
+        .then(response => {
+          console.log('Card saved.');
+        })
+        .catch(error => {
+          console.log('Error saving card:', error);
+        });
     }
-  };
-  
-  
+  };  
 
   return (
     <div className="container">
