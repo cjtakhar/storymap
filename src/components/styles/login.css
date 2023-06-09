@@ -81,3 +81,8 @@
     transition: ease-in-out 0.2s;
     cursor: pointer;
 }
+
+.create-account-link {
+    color: black;
+    text-decoration: none;
+}

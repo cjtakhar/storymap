@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Dash from './components/dash';
 import NavBar from './components/navbar';
 import Login from './components/login';
+import CreateAccount from './components/createAccount';
 import './App.css';
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
         <Routes>
           <Route path="/storymap" element={<Dash />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/create-account" element={<CreateAccount />} />
         </Routes>
       </BrowserRouter>
     </div>

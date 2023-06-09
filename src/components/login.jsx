@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import './styles/login.css';
 
@@ -50,7 +50,9 @@ const Login = () => {
             <button className="form-button" type="submit">
               Login
             </button>
+            <Link to="/create-account" className="create-account-link">
             <p className="create-account">Create Account</p>
+            </Link>
           </div>
         </form>
       </div>
