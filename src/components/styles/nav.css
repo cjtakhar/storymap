@@ -1,10 +1,16 @@
 .navbar {
     background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
 }
 
 .navbar-brand {
     color: white;
     font-size: 3rem;
+    text-decoration: none;
+
 }
 
 .navbar-brand:hover {
