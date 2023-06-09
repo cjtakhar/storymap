@@ -11,8 +11,8 @@ function App() {
       <BrowserRouter>
         <NavBar />
         <Routes>
-          <Route path="/storymap" element={<Dash />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/storymap" element={<Login />} />
+          <Route path="/home" element={<Dash />} />
           <Route path="/create-account" element={<CreateAccount />} />
         </Routes>
       </BrowserRouter>

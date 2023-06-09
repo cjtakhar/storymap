@@ -16,7 +16,7 @@ const Login = () => {
       const res = await axios.post('http://localhost:5000/api/auth/login', { username, password });
       if (res.data.success) {
         localStorage.setItem('token', res.data.token);
-        navigate('/storymap');
+        navigate('/home');
       }
     } catch (error) {
       console.log(error);

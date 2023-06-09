@@ -37,7 +37,7 @@ const CreateAccount = () => {
 
       if (response.ok) {
         // Registration successful, navigate to /storymap
-        navigate('/storymap');
+        navigate('/home');
       } else {
         // Registration failed, handle accordingly
         const data = await response.json();
