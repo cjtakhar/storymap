@@ -1,29 +1,47 @@
 .navbar {
-    background-color: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .nav-title {
-    color: white;
-    font-size: 3rem;
-    text-decoration: none;
-    margin: 0 1rem;
-  }
-  
-  .nav-link {
-    color: white;
-    font-size: 1rem;
-    text-decoration: none;
-    margin: 0 1rem;
-    position: end;
-  }
-  
-  .nav-link:hover,
-  .nav-link:focus,
-  .nav-link:active {
-    color: white;
-    outline: none; /* Remove the outline when link is active */
-  }
-  
+  background-color: black;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.navbar-brand {
+  color: white;
+  margin: 0 1rem;
+}
+
+.nav-link {
+  color: white;
+  font-size: 1rem;
+  text-decoration: none;
+  margin: 0 1rem;
+}
+
+.navbar-toggler-icon {
+  background-color: black;
+  border: solid 1px white;
+  width: 1.5rem;
+  height: 1.5rem;
+  transition: background-color 0.3s ease;
+}
+
+.navbar-toggler-icon:hover {
+  background-color: black;
+  border: solid 3px teal;
+  transition: background-color 0.3s ease;
+}
+
+.navbar-nav {
+  flex-direction: row;
+}
+
+.nav-link:hover,
+.nav-link:focus,
+.nav-link:active,
+.navbar-brand:hover,
+.navbar-brand:focus,
+.navbar-brand:active {
+  color: white;
+  outline: none;
+}
+

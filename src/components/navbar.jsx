@@ -17,9 +17,8 @@ const NavBar = () => {
     <Navbar className="navbar" expand="lg">
       <Navbar.Toggle aria-controls="navbar-nav" />
       <Navbar.Collapse id="navbar-nav">
-        <Nav className="mr-auto">
-          <Nav.Link as={Link} to="/storymap" className="nav-title">Story Map</Nav.Link>
-        </Nav>
+        <Navbar.Brand as={Link} to="/storymap" className="nav-brand">Story Map</Navbar.Brand>
+        <Nav className="mr-auto" />
         <Nav>
           {isLoggedIn ? (
             <Nav.Link as={Link} to="/login" className="nav-link" onClick={handleLogout}>Logout</Nav.Link>
