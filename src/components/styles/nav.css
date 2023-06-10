@@ -3,16 +3,27 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
-}
-
-.navbar-brand {
+  }
+  
+  .nav-title {
     color: white;
     font-size: 3rem;
     text-decoration: none;
-
-}
-
-.navbar-brand:hover {
+    margin: 0 1rem;
+  }
+  
+  .nav-link {
     color: white;
-}
+    font-size: 1rem;
+    text-decoration: none;
+    margin: 0 1rem;
+    position: end;
+  }
+  
+  .nav-link:hover,
+  .nav-link:focus,
+  .nav-link:active {
+    color: white;
+    outline: none; /* Remove the outline when link is active */
+  }
+  
