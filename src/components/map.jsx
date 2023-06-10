@@ -19,24 +19,19 @@ import './styles/map.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Map = () => {
-  const [cards, setCards] = useState(() => {
-    const savedCards = localStorage.getItem('cards');
-    if (savedCards) {
-      return JSON.parse(savedCards);
-    } else {
-      return [
-        {
-          id: 1,
-          title: 'Opening Image',
-          icon: <FiSunrise />,
-          information: ''
-        },
-        {
-          id: 2,
-          title: 'Theme Stated',
-          icon: <BsLightbulb />,
-          information: ''
-        },
+  const [cards, setCards] = useState([
+    {
+      id: 1,
+      title: 'Opening Image',
+      icon: <FiSunrise />,
+      information: ''
+    },
+    {
+      id: 2,
+      title: 'Theme Stated',
+      icon: <BsLightbulb />,
+      information: ''
+    },
     {
       id: 3,
       title: 'Set-Up',
@@ -115,69 +110,68 @@ const Map = () => {
       icon: <FiSunset />,
       information: ''
     },
-  ];
-}
-});
+  ]);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
   
-    if (token) {
-      axios.get('http://localhost:5000/api/cards', {
-        headers: {
-          Authorization: token,
-        },
-      })
-        .then(response => {
-          const cardData = response.data;
-          setCards(prevCards => {
-            return prevCards.map((card, index) => {
-              const foundCard = cardData.cards.find(c => c.id === card.id);
-              return { ...card, information: foundCard ? foundCard.information : '' };
-            });
+    axios.get('http://localhost:5000/api/cards', {
+      headers: {
+        Authorization: token,
+      },
+    })
+      .then(response => {
+        const cardData = response.data;
+        setCards(prevCards => {
+          return prevCards.map((card, index) => {
+            const foundCard = cardData.cards.find(c => c.id === card.id);
+            return { ...card, information: foundCard ? foundCard.information : '' };
           });
-        })
-        .catch(error => {
-          console.log('Error retrieving cards:', error);
         });
-    }
+      })
+      .catch(error => {
+        console.log('Error retrieving cards:', error);
+      });
   }, []);
+  
+
+  useEffect(() => {
+    const cardInfo = cards.map((card) => card.information || '');
+    localStorage.setItem('cardInfo', JSON.stringify(cardInfo));
+  }, [cards]);  
 
   const handleCardClick = (index) => {
     const updatedCard = prompt(
       `${cards[index].title}:`,
       cards[index].information
     );
-
+  
     if (updatedCard !== null) {
       const newCards = [...cards];
       newCards[index].information = updatedCard !== "" ? updatedCard : "";
       setCards(newCards);
-      localStorage.setItem('cards', JSON.stringify(newCards));
-
+  
       const token = localStorage.getItem('token');
-      if (token) {
-        const cardData = {
-          cards: newCards.map((card) => ({
-            id: card.id,
-            information: card.information,
-          })),
-        };
-
-        axios.post('http://localhost:5000/api/cards', cardData, {
-          headers: {
-            Authorization: token,
-          },
+      const cardData = {
+        cards: newCards.map((card) => ({
+          id: card.id,
+          information: card.information,
+        })),
+      };
+  
+      axios.post('http://localhost:5000/api/cards', cardData, {
+        headers: {
+          Authorization: token,
+        },
+      })
+        .then(response => {
+          console.log('Card saved.');
         })
-          .then(response => {
-            console.log('Card saved.');
-          })
-          .catch(error => {
-            console.log('Error saving card:', error);
-          });
-      }
+        .catch(error => {
+          console.log('Error saving card:', error);
+        });
     }
-  }; 
+  };  
 
   return (
     <div className="container">
