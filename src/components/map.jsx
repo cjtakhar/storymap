@@ -65,7 +65,7 @@ const Map = () => {
     {
       id: 7,
       title: 'B Story',
-      page: '30',
+      pages: '30',
       icon: <CgBee />,
       information: ''
     },
