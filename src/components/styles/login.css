@@ -12,7 +12,7 @@
     justify-content: center;
     width: 300px;
     height: 300px;
-    border: 1px solid #ccc;
+   
     border-radius: 5px;
     margin-top: 10vh;
     height: 50vh;
@@ -41,11 +41,13 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 5px;
+    text-indent: 10px;
 }
 
 .form-input:focus {
     outline: none;
     border: solid 1px;
+  
 }
 
 .form-input::placeholder {
