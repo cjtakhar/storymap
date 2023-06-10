@@ -114,64 +114,77 @@ const Map = () => {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-  
-    axios.get('http://localhost:5000/api/cards', {
-      headers: {
-        Authorization: token,
-      },
-    })
-      .then(response => {
-        const cardData = response.data;
+
+    if (token) {
+      axios.get('http://localhost:5000/api/cards', {
+        headers: {
+          Authorization: token,
+        },
+      })
+        .then(response => {
+          const cardData = response.data;
+          setCards(prevCards => {
+            return prevCards.map((card, index) => {
+              const foundCard = cardData.cards.find(c => c.id === card.id);
+              return { ...card, information: foundCard ? foundCard.information : '' };
+            });
+          });
+        })
+        .catch(error => {
+          console.log('Error retrieving cards:', error);
+        });
+    } else {
+      const storedCardInfo = JSON.parse(localStorage.getItem('cardInfo'));
+      if (storedCardInfo) {
         setCards(prevCards => {
           return prevCards.map((card, index) => {
-            const foundCard = cardData.cards.find(c => c.id === card.id);
-            return { ...card, information: foundCard ? foundCard.information : '' };
+            return { ...card, information: storedCardInfo[index] };
           });
         });
-      })
-      .catch(error => {
-        console.log('Error retrieving cards:', error);
-      });
+      }
+    }
   }, []);
-  
 
   useEffect(() => {
     const cardInfo = cards.map((card) => card.information || '');
     localStorage.setItem('cardInfo', JSON.stringify(cardInfo));
-  }, [cards]);  
+  }, [cards]);
 
   const handleCardClick = (index) => {
     const updatedCard = prompt(
       `${cards[index].title}:`,
       cards[index].information
     );
-  
+
     if (updatedCard !== null) {
       const newCards = [...cards];
       newCards[index].information = updatedCard !== "" ? updatedCard : "";
       setCards(newCards);
-  
+
       const token = localStorage.getItem('token');
-      const cardData = {
-        cards: newCards.map((card) => ({
-          id: card.id,
-          information: card.information,
-        })),
-      };
-  
-      axios.post('http://localhost:5000/api/cards', cardData, {
-        headers: {
-          Authorization: token,
-        },
-      })
-        .then(response => {
-          console.log('Card saved.');
+
+      if (token) {
+        const cardData = {
+          cards: newCards.map((card) => ({
+            id: card.id,
+            information: card.information,
+          })),
+        };
+
+        axios.post('http://localhost:5000/api/cards', cardData, {
+          headers: {
+            Authorization: token,
+          },
         })
-        .catch(error => {
-          console.log('Error saving card:', error);
-        });
+          .then(response => {
+            console.log('Card saved.');
+          })
+          .catch(error => {
+            console.log('Error saving card:', error);
+          });
+      }
     }
-  };  
+  };
 
   return (
     <div className="container">
